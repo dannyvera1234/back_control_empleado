@@ -15,7 +15,7 @@ import com.example.crud.mini_control_empleado.entities.Empleados;
 import com.example.crud.mini_control_empleado.servicio.EmpleadoService;
 
 @RestController
-@RequestMapping("/api/v1/empledos")
+@RequestMapping("/api/v1/empleados")
 public class EmpleadoController {
     @Autowired
     private EmpleadoService empleadoService;
