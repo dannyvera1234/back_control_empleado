@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.crud.mini_control_empleado.dto.GeneryDto;
 import com.example.crud.mini_control_empleado.entities.Empleados;
 import com.example.crud.mini_control_empleado.repositorios.EmpleadoRepository;
 
@@ -24,8 +25,11 @@ public class EmpleadoServiceImpl implements EmpleadoService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Empleados> findALL() {
-        return (List<Empleados>) empleadoRepository.findAll();
+    public GeneryDto<List<Empleados>> findALL() {
+        GeneryDto<List<Empleados>> empleados = new GeneryDto<List<Empleados>>();
+        empleados.setMessage("Empleados encontrados");
+        empleados.setData(empleadoRepository.findAll());
+        return empleados;
     }
 
     /**
@@ -47,9 +51,10 @@ public class EmpleadoServiceImpl implements EmpleadoService {
      */
     @Override
     @Transactional
-    public String save(Empleados empleados) {
-        empleadoRepository.save(empleados);
-        return "asdasdasda";
+    public GeneryDto<Empleados> save(Empleados empleados) {
+        GeneryDto<Empleados> dto = new GeneryDto<Empleados>();
+        dto.setMessage("Empleado Guardado");
+        return dto;
     }
 
     /**
@@ -71,13 +76,18 @@ public class EmpleadoServiceImpl implements EmpleadoService {
      */
     @Override
     @Transactional
-    public void delete(Long ide) {
+    public GeneryDto<Long> delete(Long ide) {
         empleadoRepository.deleteById(ide); // Se corrigió, no necesita `return`
+        GeneryDto<Long> dto = new GeneryDto<Long>();
+        dto.setMessage("Empleado Eliminado");
+        dto.setData(ide);
+        return dto;
     }
 
     @Override
     @Transactional
     public Empleados updatEmpleados(Long ide) {
-        return null;
+        Empleados empleados = empleadoRepository.findById(ide).orElse(null);
+        return empleados;
     }
 }

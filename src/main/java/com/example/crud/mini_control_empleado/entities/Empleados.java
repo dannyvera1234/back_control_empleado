@@ -57,4 +57,5 @@ public class Empleados {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
+
 }

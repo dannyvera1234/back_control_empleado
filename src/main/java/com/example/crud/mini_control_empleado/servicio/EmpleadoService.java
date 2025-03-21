@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page; // Import correcto para manejar paginación
 import org.springframework.data.domain.Pageable; // Import correcto para la paginación
 
+import com.example.crud.mini_control_empleado.dto.GeneryDto;
 import com.example.crud.mini_control_empleado.entities.Empleados;
 
 // Definimos la interfaz del servicio que gestionará los empleados
@@ -15,7 +16,7 @@ public interface EmpleadoService {
      * 
      * @return Lista de empleados.
      */
-    public List<Empleados> findALL();
+    public GeneryDto<List<Empleados>> findALL();
 
     /**
      * Obtiene una lista paginada de empleados.
@@ -31,7 +32,7 @@ public interface EmpleadoService {
      * 
      * @param empleados Objeto que representa el empleado a guardar.
      */
-    public String save(Empleados empleados);
+    public GeneryDto<Empleados> save(Empleados empleados);
 
     /**
      * Busca un empleado por su ID.
@@ -48,5 +49,5 @@ public interface EmpleadoService {
      * 
      * @param ide ID del empleado a eliminar.
      */
-    public void delete(Long ide);
+    public GeneryDto<Long> delete(Long ide);
 }
