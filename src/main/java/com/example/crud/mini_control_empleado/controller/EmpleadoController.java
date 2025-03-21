@@ -1,8 +1,10 @@
 package com.example.crud.mini_control_empleado.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.crud.mini_control_empleado.dto.EmpleadoDto;
 import com.example.crud.mini_control_empleado.dto.GeneryDto;
 import com.example.crud.mini_control_empleado.entities.Empleados;
 import com.example.crud.mini_control_empleado.servicio.EmpleadoService;
@@ -28,7 +31,8 @@ public class EmpleadoController {
     }
 
     @PostMapping
-    public GeneryDto<Empleados> saveEmpleado(@RequestBody Empleados empleados) {
+    public GeneryDto<EmpleadoDto> saveEmpleado(@RequestBody Empleados empleados) {
+        System.out.println(empleados);
         return empleadoService.save(empleados);
 
     }
@@ -42,6 +46,13 @@ public class EmpleadoController {
     @PutMapping("/{ide}")
     public Empleados updateEmpleados(@PathVariable Long ide) {
         return empleadoService.updatEmpleados(ide);
-
     }
+
+    @PostMapping("/detailsEmpleado")
+    public Empleados findOne(@RequestBody Map<String, Long> request) {
+        Long ide = request.get("ide"); // Extraer el ID del body
+        System.out.println("ID recibido: " + ide);
+        return empleadoService.findOne(ide);
+    }
+
 }

@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -29,31 +30,26 @@ public class Empleados {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ide;
 
-    // @NotEmpty
-    // 📌 Valida que el campo no sea null ni esté vacío ("" o una lista vacía).
-    @NotEmpty
+    @NotBlank(message = "Los nombres no pueden estar vacios")
     private String nombres;
-    @NotEmpty
+    @NotBlank(message = "Los apellidos no pueden estar vacios")
     private String apellidos;
-    @NotEmpty
+    @NotBlank(message = "El email no puede estar vacio")
     @Email
     private String email;
-    @NotEmpty
+    @NotBlank(message = "El sexo no puede estar vacio")
     private String sexo;
-    @NotEmpty
+    @NotBlank(message = "El pais no puede estar vacio")
     private String pais;
-    // @NotNull
-    // 📌 Evita valores null, pero permite valores vacíos ("" en String).
-    @NotNull
+
+    @NotBlank(message = "El telefono no puede estar vacio")
     private String telefono;
-    @NotNull
+    @NotBlank(message = "El salario no puede estar vacio")
     private double salerio;
-    // @Temporal(TemporalType.DATE)
-    // 📌 Indica que el campo fecha se almacenará solo con la parte de la fecha
-    // (yyyy-MM-dd).
-    // @DateTimeFormat(pattern = "yyyy-MM-dd")
-    // 📌 Define el formato de fecha esperado al recibir datos en un request.
-    @NotNull
+    @NotBlank(message = "La direccion no puede estar vacia")
+    private String dirreccion;
+
+    @NotBlank(message = "La fecha no puede estar vacia")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;

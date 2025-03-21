@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page; // Import correcto para manejar paginación
 import org.springframework.data.domain.Pageable; // Import correcto para la paginación
 
+import com.example.crud.mini_control_empleado.dto.EmpleadoDto;
 import com.example.crud.mini_control_empleado.dto.GeneryDto;
 import com.example.crud.mini_control_empleado.entities.Empleados;
 
@@ -32,7 +33,7 @@ public interface EmpleadoService {
      * 
      * @param empleados Objeto que representa el empleado a guardar.
      */
-    public GeneryDto<Empleados> save(Empleados empleados);
+    public GeneryDto<EmpleadoDto> save(Empleados empleados);
 
     /**
      * Busca un empleado por su ID.

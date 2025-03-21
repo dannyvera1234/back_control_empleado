@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.crud.mini_control_empleado.dto.EmpleadoDto;
 import com.example.crud.mini_control_empleado.dto.GeneryDto;
 import com.example.crud.mini_control_empleado.entities.Empleados;
 import com.example.crud.mini_control_empleado.repositorios.EmpleadoRepository;
@@ -51,9 +52,19 @@ public class EmpleadoServiceImpl implements EmpleadoService {
      */
     @Override
     @Transactional
-    public GeneryDto<Empleados> save(Empleados empleados) {
-        GeneryDto<Empleados> dto = new GeneryDto<Empleados>();
+    public GeneryDto<EmpleadoDto> save(Empleados empleados) {
+        Empleados savEmpleados = empleadoRepository.save(empleados);
+        GeneryDto<EmpleadoDto> dto = new GeneryDto<EmpleadoDto>();
         dto.setMessage("Empleado Guardado");
+
+        dto.setData(
+                new EmpleadoDto(
+                        savEmpleados.getIde(),
+                        savEmpleados.getNombres(),
+                        savEmpleados.getApellidos(),
+                        savEmpleados.getEmail(),
+                        savEmpleados.getPais(),
+                        savEmpleados.getTelefono()));
         return dto;
     }
 
